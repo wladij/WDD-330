@@ -23,5 +23,8 @@
 ---
 _BYU-Pathway Worldwide improves lives through access to spiritually based, online affordable higher education. Its mission is to develop disciples of Jesus Christ who are leaders in their homes, the Church, and their communities._
 
+### Link for page in Netlify
 
+- This is the link for the page published in Netlify.
+[Sleep Outside](https://68bd02675692b9370a178da8--boisterous-gumdrop-19d693.netlify.app/)
 
