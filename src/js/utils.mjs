@@ -21,3 +21,9 @@ export function setClick(selector, callback) {
   });
   qs(selector).addEventListener("click", callback);
 }
+
+export function getParam(param) {
+  const queryString = window.location.search; //get the query string part of the current URL (the part after the ?)
+  const urlParams = new URLSearchParams(queryString); //create a URLSearchParams object making it convenient to work with the parameters
+  return urlParams.get(param); //retrieves that value of the named parameter, in this case product
+}
