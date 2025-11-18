@@ -298,6 +298,41 @@ button {
   color: #222;
 }
 
+.product-image-wrapper {
+  position: relative;
+}
+
+.discount-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: #e63946;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #777;
+  margin-left: 8px;
+  font-size: 0.9rem;
+}
+
+.discount-tag {
+  background-color: red;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  margin-left: 10px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+
 footer {
   font-size: var(--small-font);
   padding: 1em;

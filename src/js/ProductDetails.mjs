@@ -60,6 +60,19 @@ function productDetailsTemplate(product) {
   // Description
   document.querySelector("#productDesc").innerHTML =
     product.DescriptionHtmlSimple;
+ // descount
+  const discountTag = document.querySelector("#discount-tag");
+
+  if (product.FinalPrice < product.SuggestedRetailPrice) {
+    const discountAmount = Math.round(
+      ((product.SuggestedRetailPrice - product.FinalPrice) / product.SuggestedRetailPrice) * 100
+    );
+
+    discountTag.textContent = `${discountAmount}% OFF`;
+    discountTag.style.display = "inline-block"; 
+  } else {
+    discountTag.style.display = "none"; 
+  }
 
   // Add to cart button
   document.querySelector("#addToCart").dataset.id = product.Id;
