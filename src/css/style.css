@@ -448,6 +448,30 @@ button {
   }
 }
 
+.alert {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alert p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.alert .close {
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
 footer {
   font-size: var(--small-font);
   padding: 1em;
