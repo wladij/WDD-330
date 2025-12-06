@@ -22,7 +22,14 @@ export default class ProductDetails {
 
   addProductToCart() {
     const cartItems = getLocalStorage("so-cart") || [];
+    const existing = cartItems.find(item => item.Id === this.product.Id);
+
+  if (existing) {
+    existing.Quantity++; 
+  } else {
+    this.product.Quantity = 1;
     cartItems.push(this.product);
+  }
     setLocalStorage("so-cart", cartItems);
     alertMessage(`${this.product.Name} has been added to your cart!`, false);
   }
