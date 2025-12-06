@@ -4,7 +4,7 @@ import { renderListWithTemplate } from './utils.mjs';
 function productCardTemplate(product) {
   const isDiscounted = product.FinalPrice < product.SuggestedRetailPrice;
 
-  // Calcular porcentaje de descuento
+ 
   const discountPercent = isDiscounted
     ? Math.round(((product.SuggestedRetailPrice - product.FinalPrice) / product.SuggestedRetailPrice) * 100)
     : 0;
