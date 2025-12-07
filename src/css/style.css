@@ -163,6 +163,10 @@ button {
   justify-content: center;
 }
 
+#product-list{
+  display: block;
+}
+
 .product-list a {
   text-decoration: none;
   color: var(--dark-grey);
@@ -478,10 +482,33 @@ button {
 
 .qty-btn {
   padding: 0;
-  display: flex;
+  margin: 0;
 height: 100%;
-    width: 100%;
-    text-align: center;
+    width: 30%;
+    
+}
+
+.remove-item {
+  margin-right: 0;
+  background: #ef4444;
+  border: none;
+  color: white;
+  font-size: 0.9rem;
+  
+  border-radius: 50%;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.12s ease, transform 0.06s ease;
+}
+
+.remove-item:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+}
+
+.cart-card {
+  position: relative;
 }
 
 footer {
