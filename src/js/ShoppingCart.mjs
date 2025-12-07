@@ -15,20 +15,28 @@ export default class ShoppingCart {
       return;
     }
 
+    // Render items
     const htmlItems = cartItems.map((item) => this.cartItemTemplate(item));
     this.outputElement.innerHTML = htmlItems.join("");
 
-    
+    // Add listeners
     this.addQuantityListeners();
+    this.addRemoveListeners();
 
-    
+    // Update total
     this.updateTotal();
   }
 
-  
+  // -------------------------
+  // TEMPLATE
+  // -------------------------
   cartItemTemplate(item) {
     return `
+    <button class="remove-item" data-id="${item.Id}">✕</button>
       <li class="cart-card divider" data-id="${item.Id}">
+        
+        
+
         <a href="#" class="cart-card__image">
           <img src="${item.Image}" alt="${item.Name}" />
         </a>
@@ -56,25 +64,51 @@ export default class ShoppingCart {
     `;
   }
 
- 
+  // -------------------------
+  // REMOVE LISTENERS
+  // -------------------------
+  addRemoveListeners() {
+    const removeBtns = document.querySelectorAll(".remove-item");
+
+    removeBtns.forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const id = e.target.dataset.id;
+        this.removeItem(id);
+      });
+    });
+  }
+
+  // -------------------------
+  // REMOVE ITEM
+  // -------------------------
+  removeItem(id) {
+    let cart = getLocalStorage(this.key) || [];
+
+    cart = cart.filter(item => item.Id != id);
+
+    localStorage.setItem(this.key, JSON.stringify(cart));
+
+    this.init(); // re-render
+  }
+
+  // -------------------------
+  // QUANTITY LISTENERS
+  // -------------------------
   addQuantityListeners() {
     const inputs = document.querySelectorAll(".quantity-input");
     const increaseBtns = document.querySelectorAll(".increase");
     const decreaseBtns = document.querySelectorAll(".decrease");
 
-   
     inputs.forEach(input => {
       input.addEventListener("change", (e) => {
         const productId = e.target.dataset.id;
         let newQty = parseInt(e.target.value);
-
         if (newQty < 1) newQty = 1;
 
         this.updateQuantity(productId, newQty);
       });
     });
 
- 
     increaseBtns.forEach(btn => {
       btn.addEventListener("click", (e) => {
         const id = e.target.dataset.id;
@@ -90,7 +124,9 @@ export default class ShoppingCart {
     });
   }
 
- 
+  // -------------------------
+  // CHANGE QUANTITY BY +/- 1
+  // -------------------------
   changeQuantity(id, delta) {
     let cart = getLocalStorage(this.key) || [];
 
@@ -103,11 +139,12 @@ export default class ShoppingCart {
     });
 
     localStorage.setItem(this.key, JSON.stringify(cart));
-
     this.init();
   }
 
- 
+  // -------------------------
+  // CHANGE TO SPECIFIC QUANTITY
+  // -------------------------
   updateQuantity(productId, newQty) {
     let cart = getLocalStorage(this.key) || [];
 
@@ -119,12 +156,12 @@ export default class ShoppingCart {
     });
 
     localStorage.setItem(this.key, JSON.stringify(cart));
-
-   
     this.init();
   }
 
- 
+  // -------------------------
+  // UPDATE TOTAL
+  // -------------------------
   updateTotal() {
     const cartItems = getLocalStorage(this.key) || [];
     const footer = document.querySelector('.list-footer');
