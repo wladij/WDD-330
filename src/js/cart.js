@@ -1,42 +1,9 @@
-import { getLocalStorage } from "./utils.mjs";
+import { loadHeaderFooter } from "./utils.mjs";
+import ShoppingCart from "./ShoppingCart.mjs";
 
-function renderCartContents() {
-  let cartItems = getLocalStorage("so-cart");
+loadHeaderFooter();
 
-  
-  if (!Array.isArray(cartItems)) {
-    cartItems = [];
-  }
+const cartList = document.querySelector(".product-list");
+const cart = new ShoppingCart(cartList);
 
-
-  if (cartItems.length === 0) {
-    document.querySelector(".product-list").innerHTML = `
-      <li class="cart-card divider">
-        <p>Your cart is empty</p>
-      </li>
-    `;
-    return;
-  }
-
-
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
-}
-
-function cartItemTemplate(item) {
-  return `
-    <li class="cart-card divider">
-      <a href="#" class="cart-card__image">
-        <img src="${item.Image}" alt="${item.Name}" />
-      </a>
-      <a href="#">
-        <h2 class="card__name">${item.Name}</h2>
-      </a>
-      <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-      <p class="cart-card__quantity">qty: 1</p>
-      <p class="cart-card__price">$${item.FinalPrice}</p>
-    </li>
-  `;
-}
-
-renderCartContents();
+cart.init();
