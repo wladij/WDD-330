@@ -116,6 +116,50 @@ button {
 
 /* End utility classes */
 
+/* ===== Product Categories ===== */
+#category-title{
+  padding: 20px;
+  font-size: 2em;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem auto;
+  max-width: 800px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.categories a {
+  text-decoration: none;
+  color: var(--dark-grey);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.categories a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.categories img {
+  width: 80px;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+.categories p {
+  margin: 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
 /* Cart icon styles */
 .cart {
   padding-top: 1em;
@@ -203,6 +247,21 @@ button {
   width: 100%;
 }
 
+
+/*Start total*/
+.cart-footer {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-top: 1px solid #ccc;
+  text-align: right;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.hide {
+  display: none;
+}
+/*end total */
 /* Start cart list card styles */
 .cart-card {
   display: grid;

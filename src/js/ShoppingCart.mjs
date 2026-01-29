@@ -3,14 +3,9 @@ import { getLocalStorage, renderListWithTemplate } from "./utils.mjs";
 function cartItemTemplate(item) {
   return `
     <li class="cart-card divider">
-      <a href="#" class="cart-card__image">
-        <img src="${item.Image}" alt="${item.Name}" />
-      </a>
-      <a href="#">
-        <h2 class="card__name">${item.Name}</h2>
-      </a>
-      <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-      <p class="cart-card__quantity">qty: 1</p>
+      <img src="${item.Images.PrimaryMedium}" alt="${item.NameWithoutBrand}" />
+      <h2>${item.NameWithoutBrand}</h2>
+      <p>${item.Colors?.[0]?.ColorName || ""}</p>
       <p class="cart-card__price">$${item.FinalPrice}</p>
     </li>
   `;
@@ -19,12 +14,14 @@ function cartItemTemplate(item) {
 export default class ShoppingCart {
   constructor(listElement) {
     this.listElement = listElement;
+    this.cartFooter = document.querySelector(".cart-footer");
+    this.cartTotal = document.querySelector(".cart-total");
   }
 
   init() {
     const cartItems = getLocalStorage("so-cart") || [];
 
-    if (cartItems.length === 0) {
+    if (!cartItems.length) {
       this.listElement.innerHTML = `
         <li class="cart-card divider">
           <p>Your cart is empty</p>
@@ -34,13 +31,26 @@ export default class ShoppingCart {
     }
 
     this.renderCart(cartItems);
+    this.renderTotal(cartItems);
   }
 
   renderCart(cartItems) {
     renderListWithTemplate(
       cartItemTemplate,
       this.listElement,
-      cartItems
+      cartItems,
+      "afterbegin",
+      true
     );
+  }
+
+  renderTotal(cartItems) {
+    const total = cartItems.reduce(
+      (sum, item) => sum + item.FinalPrice,
+      0
+    );
+
+    this.cartFooter.classList.remove("hide");
+    this.cartTotal.innerHTML = `Total: $${total.toFixed(2)}`;
   }
 }
