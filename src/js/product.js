@@ -5,8 +5,11 @@ import ProductDetails from "./ProductDetails.mjs";
 
 loadHeaderFooter();
 
-const dataSource = new ProductData("tents");
+
+const dataSource = new ProductData();
 const productID = getParam("product");
+
+console.log("Product ID from URL:", productID);
 
 const product = new ProductDetails(productID, dataSource);
 product.init();
@@ -23,7 +26,14 @@ function addProductToCart(product) {
 // add to cart button event handler
 async function addToCartHandler(e) {
   const product = await dataSource.findProductById(e.target.dataset.id);
-  addProductToCart(product);
+  console.log("Clicked ID:", e.target.dataset.id);
+if (!product) {
+  console.error("Product not found");
+  return;
+}
+
+addProductToCart(product);
+
 }
 
 // add listener to Add to Cart button
